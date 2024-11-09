@@ -12,7 +12,6 @@ app.use('/receipts', router)
 
 // Global Error Handler
 app.use((err:Error, req:Request, res:Response, next:NextFunction) => {
-  // Log the error (useful for debugging)
   console.error('Error:', err.message);
 
   // Send a JSON response with error details
