@@ -1,5 +1,5 @@
 # Use an official Node.js image as the base
-FROM node:18
+FROM node:22
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
@@ -16,8 +16,11 @@ COPY . .
 # Compile TypeScript code
 RUN npm run build
 
-# Expose the port specified in the environment variable or default to 3000
-EXPOSE ${PORT}
+# Set the PORT environment variable (default to 3000)
+ENV PORT=3000
+
+# Expose the port to Docker
+EXPOSE 3000
 
 # Set the default command to run the compiled app
 CMD ["node", "dist/server/server.js"]

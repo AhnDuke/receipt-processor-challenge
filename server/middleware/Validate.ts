@@ -32,7 +32,7 @@ const ValidateRequest = {
     next: NextFunction
   ): void => {
     const receipt = req.body;
-  
+    console.log('Received Reciept')
     if (ValidateRequest.isReceipt(receipt)) {
       const { items, purchaseDate, purchaseTime, retailer, total } = receipt;
 
@@ -96,7 +96,7 @@ const ValidateRequest = {
           }
         }
       }
-
+      console.log('Receipt Validated!')
       next();
 
     } else {
@@ -126,6 +126,7 @@ const ValidateRequest = {
           });
           return;
         }
+        console.log('Receipt Found!')
         next();
       }      
     } else {

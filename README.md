@@ -1,3 +1,18 @@
+# Instructions to run
+
+All routes accessible through http://localhost:[MAPPED PORT] as defined by api.yml
+
+## Using Docker CLI
+1. Pull docker image: 'docker pull ahnduke/receipt-challenge:latest'
+2. Run the image: 'docker run -d -p [DESIRED PORT]:3000 ahnduke/receipt-challenge:latest'
+
+## Using Docker Desktop
+1. Search 'ahnduke/receipt-challenge'
+2. Hover result, click 'Run'
+3. In optional settings, declare port mapping as desired
+    
+    * Ports -> Host port
+
 # Receipt Processor
 
 Build a webservice that fulfils the documented API. The API is described below. A formal definition is provided 

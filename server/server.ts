@@ -2,7 +2,7 @@ import express, {Request, Response, NextFunction} from 'express';
 import router from './routes/ReceiptRoutes.js';
 const app = express();
 const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
-const IP = process.env.localIp ? process.env.localIp : '';
+const IP = process.env.IP ? process.env.IP : '';
 
 // Parse JSON Bodies
 app.use(express.json()); 

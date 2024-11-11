@@ -16,23 +16,22 @@ interface ReceiptData {
 const ReceiptDataController = {
   storage: new Map<string, ReceiptData>(),
   newReceipt: (req:Request, res: Response, next: NextFunction) => {
-
+    console.log('Storing Receipt')
     //create id for receipt
     const receipt = req.body;
     const receiptId = crypto.randomUUID();
     ReceiptDataController.storage.set(receiptId, {receipt: receipt, points: ReceiptDataController.generatePoints(receipt)})
     res.status(200).json({id: receiptId})
-
   },
 
   generatePoints: (receipt: Receipt) => {
+    console.log('Generating Points')
     let total = 0;
     const receiptTotal = parseFloat(receipt.total);
 
 
     //remove all non alphanumeric from retailer name, add length to total points
     const cleanedRetailerName = receipt.retailer.replace(/[^a-zA-Z0-9]/g, '');
-
 
     total += cleanedRetailerName.length;
     //check total amount if round number
@@ -55,11 +54,12 @@ const ReceiptDataController = {
     //add points based on day and hour
     const [hours, minutes] = receipt.purchaseTime.split(":").map(Number);
     const purchaseDate = new Date(receipt.purchaseDate);
-    const purchaseDay = purchaseDate.getDay();
+    const purchaseDay = purchaseDate.getUTCDate();
     const purchaseHour = hours;
     if(purchaseDay % 2 !== 0){
       total+=6
     }
+
     if(purchaseHour >= 14 && purchaseHour < 16){
       total+=10
     }
@@ -74,17 +74,17 @@ const ReceiptDataController = {
         total += points;
       }
     })
-
+    console.log('Points Assigned: ' + total)
     return total
   },
 
   //get points from storage
   getPoints: (req:Request, res:Response, next: NextFunction) => {
-    
     const id = req.params.id;
     const points = ReceiptDataController.storage.get(id)!.points;
     res.status(200).json({points:points})
-
+    
+    console.log('Requested Points: ' + points)
   }
 
 }
