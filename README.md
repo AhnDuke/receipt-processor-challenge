@@ -1,6 +1,6 @@
 # Instructions to run
 
-All routes accessible through http://localhost:[MAPPED PORT] as defined by api.yml
+All routes accessible through ``http://localhost:[MAPPED PORT]`` as defined by api.yml
 
 ## Using Docker CLI
 1. Pull docker image: 'docker pull ahnduke/receipt-challenge:latest'
